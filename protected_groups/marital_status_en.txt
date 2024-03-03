@@ -1,0 +1,5 @@
+Married (Husband/Wife)
+Unmarried (Single)
+Divorced (Divorced)
+Widower (Widow)
+Civil union
