@@ -6,7 +6,8 @@ import pandas as pd
 from src.helpers import protected_groups_uk, protected_groups_en, load_names
 from src.constants import DATA_PATH, MATCHER_PATH, PRIMARY_POSITIONS, PROTECTED_GROUPS
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("loader_and_corruption")
+logger.setLevel(logging.INFO)
 
 class DataLoader:
     """class for loading data and structure in proper way"""
@@ -46,25 +47,25 @@ class DataLoader:
         Returns:
             pd.DataFrame:  processed data
         """
-        logging.info('Loading data...')
+        logger.info('Loading data...')
         candidates = self._load_hf_dataset(self.path_candidates)
         jobs = self._load_hf_dataset(self.path_jobs)
         matchers = self._load_json(self.path_matchers)
-        logging.info('Data loaded')
+        logger.info('Data loaded')
 
-        logging.info('Filtering data...')
+        logger.info('Filtering data...')
         candidates = self._data_filtering(candidates)
-        logging.info('Data filtered')
+        logger.info('Data filtered')
 
         if if_sampling:
-            logging.info('Sampling data...')
+            logger.info('Sampling data...')
             candidates = self._data_sampling(candidates, matchers)
             print(candidates.shape[0])
-            logging.info('Data sampled')
+            logger.info('Data sampled')
 
-        logging.info('Combining data...')
+        logger.info('Combining data...')
         data = self._data_combining(candidates, jobs, matchers)
-        logging.info('Data combined')
+        logger.info('Data combined')
         return data
 
     def _data_sampling(self, candidates: pd.DataFrame, matchers: dict[str, str]) -> pd.DataFrame:

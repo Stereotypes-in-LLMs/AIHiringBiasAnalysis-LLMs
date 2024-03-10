@@ -44,6 +44,8 @@ PRIMARY_POSITIONS= [
     'Web Developer'
 ]
 
+PROTECTED_GROUPS_LIST_EN = ['gender', 'marital_status', 'military_status', 'religion', 'name', 'age']
+PROTECTED_GROUPS_LIST_UK = ['стать', 'сімейний статус', 'військовий стантус', 'релігія', 'ім\'я', 'вік']
 PROTECTED_GROUPS = {
     "gender": {
         "uk": "../protected_groups/gender_ukr.txt",
