@@ -9,6 +9,13 @@ from src.constants import DATA_PATH, MATCHER_PATH, PRIMARY_POSITIONS, PROTECTED_
 logger = logging.getLogger("loader_and_corruption")
 logger.setLevel(logging.INFO)
 
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
+
+file_handler = logging.FileHandler('logs.log')
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 class DataLoader:
     """class for loading data and structure in proper way"""
     CANDIATES_PER_POSITION = 5
