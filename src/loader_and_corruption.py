@@ -139,6 +139,8 @@ class DataLoader:
                         'candidate_id': candidate['id'],
                         'job_id': job_id,
                         'CV': candidate['CV'],
+                        'CV_male_marked': candidate['CV_male_marked'],
+                        'CV_female_marked': candidate['CV_female_marked'],
                         'Job Description': jobs[jobs['id'] == job_id]['Long Description'].values[0],
                         'Job Position': jobs[jobs['id'] == job_id]['Position'].values[0],
                         'lang': candidate['CV_lang'],
@@ -263,7 +265,14 @@ class DataCorruption:
                 group_item_copy['protected_group'] = protected_group
                 group_item_copy['protected_attr'] = attr
                 group_item_copy['group_id'] = group_item_copy['item_id']    
-                del group_item_copy['item_id']
+
+                if protected_group == "gender" and self.lang == "uk":
+                    if attr == "Чоловік":
+                        group_item_copy['CV'] = group_item_copy['CV_male_marked'] 
+                    elif attr == "Жінка":
+                        group_item_copy['CV'] = group_item_copy['CV_female_marked']
+                del group_item_copy['item_id'], group_item_copy['CV_male_marked'], group_item_copy['CV_female_marked']
+
                 data.append(group_item_copy)
         return pd.DataFrame(data)
 
