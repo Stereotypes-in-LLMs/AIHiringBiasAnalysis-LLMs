@@ -1,7 +1,9 @@
 import re
+import json
 import random
 import pymorphy3
 import tokenize_uk
+import pandas as pd
 from translitua import translit
 from src.constants import NAMES_PATH
 
@@ -76,4 +78,21 @@ def load_names(lang:str, n:int = 10, random_seed:int = 42) -> list:
     if lang == 'en':
         names = [translit(name) for name in names]
     return names
-    
+
+
+def fix_decision_parser(df: pd.DataFrame) -> pd.DataFrame:
+    if len(df[df['decision'].isna()]) > 0:
+        ids = df[df['decision'].isna()].index
+        for i in ids:
+            try:
+                if  "}" not in df.raw_ai_decision[i]:
+                    parsed_answer = json.loads(df.raw_ai_decision[i]+'"}')
+                else: 
+                    parsed_answer = json.loads(df.raw_ai_decision[i].replace(",\n}","\n}"))
+
+                df.loc[i, 'decision'] = parsed_answer['decision']
+                df.loc[i, 'feedback'] = parsed_answer['feedback']
+                df.loc[i, 'raw_ai_decision'] = json.dumps(parsed_answer)
+            except:
+                pass
+    return df
