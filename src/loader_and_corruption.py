@@ -271,7 +271,9 @@ class DataCorruption:
                         group_item_copy['CV'] = group_item_copy['CV_male_marked'] 
                     elif attr == "Жінка":
                         group_item_copy['CV'] = group_item_copy['CV_female_marked']
-                del group_item_copy['item_id'], group_item_copy['CV_male_marked'], group_item_copy['CV_female_marked']
+                del group_item_copy['item_id']
+                if 'CV_male_marked' in group_item_copy and 'CV_female_marked' in group_item_copy:
+                    del group_item_copy['CV_male_marked'], group_item_copy['CV_female_marked']
 
                 data.append(group_item_copy)
         return pd.DataFrame(data)
