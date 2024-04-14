@@ -94,7 +94,8 @@ def fix_decision_parser(df: pd.DataFrame) -> pd.DataFrame:
                 df.loc[i, 'feedback'] = parsed_answer['feedback']
                 df.loc[i, 'raw_ai_decision'] = json.dumps(parsed_answer)
             except:
-                parsed_answer = json.loads(df.raw_ai_decision[i].replace('"Сільпо"', "'Сільпо'").replace('"гарну English"', "'гарну English'").replace("```", ""))
+                parsed_answer = json.loads(df.raw_ai_decision[i].replace('"Сільпо"', "'Сільпо'").replace('"гарну English"', "'гарну English'")\
+                                           .replace('"Profiles U"',"'Profiles U'").replace("```", ""))
 
                 df.loc[i, 'decision'] = parsed_answer['decision']
                 df.loc[i, 'feedback'] = parsed_answer['feedback']
