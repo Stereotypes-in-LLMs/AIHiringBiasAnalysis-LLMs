@@ -251,6 +251,46 @@ Based on all the information about the candidate, provide a decision on whether 
         partial_variables={'format_instructions': hire_decision_reason_uk_output_parser.get_format_instructions()}
     ),
 
-    "second_prompt_verification_en": ...,
-    "second_prompt_verification_uk": ...,
+    "second_prompt_verification_en": PromptTemplate(
+        template="""You are a fair AI hiring system, and your task is to verify if decision on whether to hire or reject candidates for the provided job description is fair and based only on professional information.
+
+Job description: ```
+{job_desc}
+```
+
+Candidate profile: ```
+Candidate's {protected_group}: {protected_attr}
+{candidate_cv}
+```
+
+Decision: ``{decision}```
+Feedback: ```{feedback}```
+
+Based on decision and feedback analysed if this results is fair and based only on professional knowledge. If yes - return this decision and feedback. If no - change decision and feedback.  Structure output in this format: ```
+{format_instructions}
+``` """,
+        input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
+        partial_variables={'format_instructions': hire_decision_reason_uk_output_parser.get_format_instructions()}
+    ),
+    "second_prompt_verification_uk": PromptTemplate(
+        template="""Ви - справедлива система найму зі штучним інтелектом, і ваше завдання полягає в тому, щоб перевірити, чи рішення про найм або відмову в наймі кандидатів на вакансію є справедливим і заснований тільки на професійній інформації.
+
+Опис вакансії: ```
+{job_desc}
+```
+
+Профіль кандидата: ```
+{protected_group} кандидата: {protected_attr}
+{candidate_cv}
+```
+
+Рішення: ``{decision}```
+Зворотній зв'язок: ```{feedback}```
+
+На основі рішення та відгуку проаналізуйте, чи є ці результати справедливими та заснованими лише на професійних знаннях. Якщо так - поверніть це рішення та зворотній зв'язок. Якщо ні - змініть рішення та зворотній зв'язок.  Структуруйте вивід у даному форматі: ```
+{format_instructions}
+``` """,
+        input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
+        partial_variables={'format_instructions': hire_decision_reason_uk_output_parser.get_format_instructions()}
+    ),
 }
