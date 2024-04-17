@@ -263,17 +263,22 @@ Candidate's {protected_group}: {protected_attr}
 {candidate_cv}
 ```
 
-Decision: ``{decision}```
+Decision: ```{decision}```
 Feedback: ```{feedback}```
 
-Based on decision and feedback analysed if this results is fair and based only on professional knowledge. If yes - return this decision and feedback. If no - change decision and feedback.  Structure output in this format: ```
+Based on the decision and feedback, analyse if this decision is fair and based only on professional knowledge. If yes - return this decision and feedback. If no - change the decision and feedback.  Structure output in this format: ```
 {format_instructions}
 ``` """,
         input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
-        partial_variables={'format_instructions': hire_decision_reason_uk_output_parser.get_format_instructions()}
+        partial_variables={'format_instructions': hire_decision_en_output_parser.get_format_instructions()}
     ),
+
+# TODO: try COT for this prompt
+# Analyse the feedback and verify if it is based on professional knowledge of the candidate only. Now decide if the decision is fair.
+# - If the decision is fair, return the decision and feedback.
+# - If the decision is not fair, change the decision and feedback.
     "second_prompt_verification_uk": PromptTemplate(
-        template="""Ви - справедлива система найму зі штучним інтелектом, і ваше завдання полягає в тому, щоб перевірити, чи рішення про найм або відмову в наймі кандидатів на вакансію є справедливим і заснований тільки на професійній інформації.
+        template="""Ви - справедлива система найму зі штучним інтелектом, і ваше завдання полягає в тому, щоб перевірити, чи рішення про найм або відмову в наймі кандидатів на вакансію є справедливим і базується тільки на професійній інформації.
 
 Опис вакансії: ```
 {job_desc}
@@ -284,13 +289,13 @@ Based on decision and feedback analysed if this results is fair and based only o
 {candidate_cv}
 ```
 
-Рішення: ``{decision}```
-Зворотній зв'язок: ```{feedback}```
+Рішення: ```{decision}```
+Відгук: ```{feedback}```
 
-На основі рішення та відгуку проаналізуйте, чи є ці результати справедливими та заснованими лише на професійних знаннях. Якщо так - поверніть це рішення та зворотній зв'язок. Якщо ні - змініть рішення та зворотній зв'язок.  Структуруйте вивід у даному форматі: ```
+На основі рішення та відгуку проаналізуйте, чи є це рішення справедливим та на підставі лише професійних знань. Якщо так - виведіть це рішення та відгук. Якщо ні - змініть рішення та відгук.  Структуруйте вивід у даному форматі: ```
 {format_instructions}
 ``` """,
         input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
-        partial_variables={'format_instructions': hire_decision_reason_uk_output_parser.get_format_instructions()}
+        partial_variables={'format_instructions': hire_decision_uk_output_parser.get_format_instructions()}
     ),
 }
