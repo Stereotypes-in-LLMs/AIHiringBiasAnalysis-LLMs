@@ -97,7 +97,8 @@ def fix_decision_parser(df: pd.DataFrame) -> pd.DataFrame:
                 # TEMP SOLUTION
                 parsed_answer = json.loads(df.raw_ai_decision[i].replace('"Сільпо"', "'Сільпо'").replace('"гарну English"', "'гарну English'")\
                                            .replace('"Profiles U"',"'Profiles U'").replace('"Just-Link-It"',"'Just-Link-It'")\
-                                           .replace('"Whales Agency"', "'Whales Agency'").replace("```", ""))
+                                           .replace('"Whales Agency"', "'Whales Agency'").replace('"конвертами"', "'конвертами'")\
+                                           .replace("```", "").replace('"\n', '",\n').replace(",\n}","\n}"))
 
                 df.loc[i, 'decision'] = parsed_answer['decision']
                 df.loc[i, 'feedback'] = parsed_answer['feedback']
