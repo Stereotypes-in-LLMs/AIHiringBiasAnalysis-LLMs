@@ -103,7 +103,7 @@ def run_experiment(folder_path: str,  chain: object, data: pd.DataFrame, lang: s
     logger.info(f"Finished experiment for {lang} and saving to {folder_path}.")
     return data_paths
 
-def run_experimment_second_model_verify(folder_path: str,  chain: object, based_on_results: str, lang: str, batch_size: int = 32, force_run: bool = False, test_id: list|None = None) -> dict:
+def run_experimment_second_model_verify(folder_path: str,  chain: object, based_on_results: str, lang: str, batch_size: int = 32, force_run: bool = False, test_id: list = None) -> dict:
     """
     Run experiment for all protected groups
     
@@ -114,6 +114,7 @@ def run_experimment_second_model_verify(folder_path: str,  chain: object, based_
         lang (str):             language of the data
         batch_size (int):       batch size for processing, default is 32
         force_run (bool):       if True, force run the experiment, default is False
+        test_id (list):         list of test ids to run the experiment. Default is None
     """
     logger.info(f"Running experiment for {lang} and saving to {folder_path}.")
     data_paths = {}
@@ -123,7 +124,7 @@ def run_experimment_second_model_verify(folder_path: str,  chain: object, based_
     if not os.path.exists(save_root_path):
         os.makedirs(save_root_path)
 
-    if os.path.notexists(based_on_results):
+    if not os.path.exists(based_on_results):
         raise Exception(f"{based_on_results} folder path not found")
     
     for group_en, group_uk in zip(PROTECTED_GROUPS_LIST_EN, PROTECTED_GROUPS_LIST_UK):
