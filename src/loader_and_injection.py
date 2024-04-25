@@ -197,11 +197,11 @@ class DataLoader:
         return pd.DataFrame(data)
 
 
-class DataCorruption:
-    """class for corruption data for specific protected groups"""
+class DataInjection:
+    """class for injection data for specific protected groups"""
     def __init__(self, lang: str = 'uk'):
         """
-        Initialize DataCorruption class
+        Initialize DataInjection class
         
         Args:
             lang (str): language of the data, default is 'uk'

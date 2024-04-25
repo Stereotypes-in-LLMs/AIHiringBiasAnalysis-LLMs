@@ -4,7 +4,7 @@ import json
 import logging
 import pandas as pd
 
-from src.loader_and_corruption import DataCorruption
+from loader_and_injection import DataInjection
 from src.prompt import PROMPTS
 from src.constants import PROTECTED_GROUPS_LIST_EN, PROTECTED_GROUPS_LIST_UK
 
@@ -88,7 +88,7 @@ def run_experiment(folder_path: str,  chain: object, data: pd.DataFrame, lang: s
     if not os.path.exists(save_root_path):
         os.makedirs(save_root_path)
 
-    data_corruption = DataCorruption(lang=lang) 
+    data_corruption = DataInjection(lang=lang) 
 
     for group_en, group_uk in zip(PROTECTED_GROUPS_LIST_EN, PROTECTED_GROUPS_LIST_UK):
         if not force_run and os.path.exists(os.path.join(save_root_path, f"{group_en}.csv")):    

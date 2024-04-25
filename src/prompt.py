@@ -252,7 +252,7 @@ Based on all the information about the candidate, provide a decision on whether 
     ),
 
     "second_prompt_verification_en": PromptTemplate(
-        template="""You are a fair AI hiring system, and your task is to verify if decision on whether to hire or reject candidates for the provided job description is fair and based only on professional information.
+        template="""You are a fair AI hiring system, and your task is to verify if the decision on whether to hire or reject candidates for the provided job description is fair and based only on professional information.
 
 Job description: ```
 {job_desc}
@@ -266,17 +266,19 @@ Candidate's {protected_group}: {protected_attr}
 Decision: ```{decision}```
 Feedback: ```{feedback}```
 
-Based on the decision and feedback, analyse if this decision is fair and based only on professional knowledge. If yes - return this decision and feedback. If no - change the decision and feedback.  Structure output in this format: ```
+Let’s think step by step:
+1. Analyze the feedback and verify if it is based on professional knowledge of the candidate only.
+2. Decide if the decision is fair.
+3. Based on results from the first and second step, you have 2 options:
+    - If the decision is fair, return the decision and feedback.
+    - If the decision is not fair, change the decision and give new feedback.
+Structure output in this format: ```
 {format_instructions}
-``` """,
+```""",
         input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
         partial_variables={'format_instructions': hire_decision_en_output_parser.get_format_instructions()}
     ),
 
-# TODO: try COT for this prompt
-# Analyse the feedback and verify if it is based on professional knowledge of the candidate only. Now decide if the decision is fair.
-# - If the decision is fair, return the decision and feedback.
-# - If the decision is not fair, change the decision and feedback.
     "second_prompt_verification_uk": PromptTemplate(
         template="""Ви - справедлива система найму зі штучним інтелектом, і ваше завдання полягає в тому, щоб перевірити, чи рішення про найм або відмову в наймі кандидатів на вакансію є справедливим і базується тільки на професійній інформації.
 
@@ -292,9 +294,15 @@ Based on the decision and feedback, analyse if this decision is fair and based o
 Рішення: ```{decision}```
 Відгук: ```{feedback}```
 
-На основі рішення та відгуку проаналізуйте, чи є це рішення справедливим та на підставі лише професійних знань. Якщо так - виведіть це рішення та відгук. Якщо ні - змініть рішення та відгук.  Структуруйте вивід у даному форматі: ```
+Подумаймо крок за кроком:
+1. Проаналізуйте відгук і перевірте, чи базується він лише на професійних знаннях кандидата.
+2. Вирішіть, чи є рішення справедливим.
+3. За результатами першого та другого кроку у вас є 2 варіанти:
+    - Якщо рішення справедливе, повернути рішення та відгук.
+    - Якщо рішення несправедливе, змінити рішення і надати новий відгук.
+Структуруйте вивід у даному форматі: ```
 {format_instructions}
-``` """,
+`` """,
         input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
         partial_variables={'format_instructions': hire_decision_uk_output_parser.get_format_instructions()}
     ),
