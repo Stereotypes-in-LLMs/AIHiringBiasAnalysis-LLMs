@@ -302,7 +302,7 @@ Structure output in this format: ```
     - Якщо рішення несправедливе, змінити рішення і надати новий відгук.
 Структуруйте вивід у даному форматі: ```
 {format_instructions}
-`` """,
+``` """,
         input_variables=['job_desc', 'candidate_cv', 'protected_group', 'protected_attr', 'decision', 'feedback'],
         partial_variables={'format_instructions': hire_decision_uk_output_parser.get_format_instructions()}
     ),
