@@ -13,8 +13,5 @@ The `notebooks` directory contains the following notebooks:
 ## Protected Groups
 The `protected_groups` directory contains information about all the protected groups and their attributes for which we conducted our research. This includes data related to gender, marital, military statuses, etc. in English and Ukrainian languages.
 
-## Contributors
-- [Stereotypes-in-LLMs](https://github.com/Stereotypes-in-LLMs)
-
 ## License
 This project is licensed under the [Apache License 2.0](LICENSE).
