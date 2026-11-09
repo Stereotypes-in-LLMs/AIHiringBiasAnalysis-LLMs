@@ -9,6 +9,8 @@ authors:
     affiliation: "Ukrainian Catholic University"
   - family-names: Romanyshyn
     given-names: Mariana
+    orcid: "https://orcid.org/0009-0002-8935-8393"
+    affiliation: "Grammarly"
 version: 1.0.0
 date-released: "2025-12-06"
 license: Apache-2.0
