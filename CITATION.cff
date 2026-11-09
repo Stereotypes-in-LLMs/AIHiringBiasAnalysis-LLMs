@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Analysis of LLMs Stereotypes for AI Assisted Hiring Decision"
+type: software
+authors:
+  - family-names: Drushchak
+    given-names: Nazarii
+    orcid: "https://orcid.org/0000-0002-5056-3026"
+    affiliation: "Ukrainian Catholic University"
+version: 1.0.0
+date-released: "2025-12-06"
+license: Apache-2.0
+repository-code: "https://github.com/Stereotypes-in-LLMs/AIHiringBiasAnalysis-LLMs"
+keywords:
+  - large language models
+  - hiring bias
+  - audit
+  - fairness
+  - Ukrainian
+abstract: >-
+  Code and resources for analyzing stereotypes in large language models for
+  AI-assisted hiring decisions in English and Ukrainian: data injection of
+  protected attributes, fairness evaluation and mitigation techniques.
